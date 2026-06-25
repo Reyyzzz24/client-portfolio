@@ -16,7 +16,7 @@ export async function sendEmail(prevState: any, formData: FormData) {
   try {
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'ryuliansatria04@gmail.com',
+      to: 'gherryanwashesyasyagara@gmail.com',
       subject: `Pesan baru dari ${name}`,
       text: `Nama: ${name}\nEmail: ${email}\n\nPesan: ${message}`,
     });
