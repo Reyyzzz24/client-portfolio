@@ -68,13 +68,12 @@ export default function Login() {
           )}
         </Button>
 
-        {/* 2. Tambahkan teks link ke halaman register */}
-        <p className="text-center text-sm text-gray-500">
+        {/* <p className="text-center text-sm text-gray-500">
           Belum punya akun?{' '}
           <Link href="/auth/register" className="text-black font-bold hover:underline">
             Sign Up
           </Link>
-        </p>
+        </p> */}
       </form>
     </div>
   );
