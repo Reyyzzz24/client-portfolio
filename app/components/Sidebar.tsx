@@ -53,37 +53,37 @@ export default function Sidebar({ activeItem, setActiveItem, isOpen, setIsOpen, 
                         {isOpen && <span className="ml-4 text-sm font-medium">{item.name}</span>}
                     </div>
                 ))}
-                <div className="relative bg-white rounded-2xl border border-zinc-200 mt-55">
-                    <button
-                        onClick={() => setShowLogout(!showLogout)}
-                        className="w-full flex items-center gap-3 p-2 hover:bg-zinc-50 rounded-xl transition-all"
-                    >
-                        <div className="w-8 h-8 bg-zinc-900 rounded-full flex items-center justify-center text-white shrink-0">
-                            <User size={16} />
-                        </div>
-                        {isOpen && (
-                            <div className="text-left overflow-hidden">
-                                <p className="text-xs font-bold text-zinc-900 truncate">{user?.full_name || "Memuat..."}</p>
-                                <p className="text-[10px] text-zinc-500 truncate">{user?.email}</p>
-                            </div>
-                        )}
-                    </button>
-
-                    {showLogout && (
-                        <div
-                            onMouseLeave={() => setShowLogout(false)}
-                            className="absolute bottom-full left-0 mb-2 w-full bg-white border border-zinc-200 rounded-2xl shadow-xl p-2 z-50"
-                        >
-                            <button
-                                onClick={handleLogout}
-                                className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl transition"
-                            >
-                                <LogOut size={16} /> Logout
-                            </button>
+            </nav>
+            <div className="relative bg-white rounded-2xl border border-zinc-200">
+                <button
+                    onClick={() => setShowLogout(!showLogout)}
+                    className="w-full flex items-center gap-3 p-2 hover:bg-zinc-50 rounded-xl transition-all"
+                >
+                    <div className="w-8 h-8 bg-zinc-900 rounded-full flex items-center justify-center text-white shrink-0">
+                        <User size={16} />
+                    </div>
+                    {isOpen && (
+                        <div className="text-left overflow-hidden">
+                            <p className="text-xs font-bold text-zinc-900 truncate">{user?.full_name || "Memuat..."}</p>
+                            <p className="text-[10px] text-zinc-500 truncate">{user?.email}</p>
                         </div>
                     )}
-                </div>
-            </nav>
+                </button>
+
+                {showLogout && (
+                    <div
+                        onMouseLeave={() => setShowLogout(false)}
+                        className="absolute bottom-full left-0 mb-2 w-full bg-white border border-zinc-200 rounded-2xl shadow-xl p-2 z-50"
+                    >
+                        <button
+                            onClick={handleLogout}
+                            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl transition"
+                        >
+                            <LogOut size={16} /> Logout
+                        </button>
+                    </div>
+                )}
+            </div>
         </motion.aside>
     );
 }
