@@ -1,5 +1,6 @@
 "use client";
-
+import { sendEmail } from "../actions";
+import { useActionState } from "react";
 import { motion } from "framer-motion";
 
 const container = {
@@ -28,6 +29,7 @@ const fadeUp = {
 };
 
 export default function Contact() {
+  const [state, formAction] = useActionState(sendEmail, { success: false, message: "" });
   return (
     <section
       id="contact"
@@ -89,11 +91,13 @@ export default function Contact() {
           >
             <motion.form
               variants={container}
+              action={formAction}
               className="space-y-6"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <motion.input
+                  name="name"
                   variants={fadeUp}
                   type="text"
                   placeholder="Your Name"
@@ -115,6 +119,7 @@ export default function Contact() {
                 />
 
                 <motion.input
+                  name="email"
                   variants={fadeUp}
                   type="email"
                   placeholder="Your Email"
@@ -137,6 +142,7 @@ export default function Contact() {
               </div>
 
               <motion.textarea
+                name="message"
                 variants={fadeUp}
                 placeholder="Tell me about your project..."
                 rows={5}
@@ -176,6 +182,7 @@ export default function Contact() {
               >
                 Send Message
               </motion.button>
+              {state.message && <p>{state.message}</p>}
             </motion.form>
           </motion.div>
         </motion.div>
