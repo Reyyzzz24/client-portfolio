@@ -78,13 +78,17 @@ export default function HeroContent({
                             variants={fadeUp}
                             className="flex flex-wrap gap-4"
                         >
-                            <button className="bg-black text-white px-6 py-3 rounded-full font-medium transition-colors hover:bg-neutral-800">
-                                View Portfolio
-                            </button>
+                            <a href="#portfolio">
+                                <button className="bg-black text-white px-6 py-3 rounded-full font-medium transition-colors hover:bg-neutral-800">
+                                    View Portfolio
+                                </button>
+                            </a>
 
-                            <button className="border border-gray-300 px-6 py-3 rounded-full font-medium transition-colors hover:bg-gray-50">
-                                Hire Me
-                            </button>
+                            <a href="#contact">
+                                <button className="border border-gray-300 px-6 py-3 rounded-full font-medium transition-colors hover:bg-gray-50">
+                                    Hire Me
+                                </button>
+                            </a>
                         </motion.div>
                     </motion.div>
 
