@@ -1,20 +1,27 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
-import { Globe } from 'lucide-react';
+import { Globe } from "lucide-react";
 
-export default async function Footer() {
-  // Mengambil link sosial media dari database
-  const { data: socialLinks } = await supabase
-    .from("social_links")
-    .select("*");
+export default function Footer() {
+  const [socialLinks, setSocialLinks] = useState<any[]>([]);
 
-  // Fungsi helper untuk merender ikon berdasarkan string dari DB
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await supabase.from("social_links").select("*");
+      if (data) setSocialLinks(data);
+    }
+    fetchData();
+  }, []);
+
   const getIcon = (type: string) => {
     switch (type) {
-      case 'FaLinkedin': return <FaLinkedin size={24} />;
-      case 'FaInstagram': return <FaInstagram size={24} />;
-      case 'FaGithub': return <FaGithub size={24} />;
-      case 'Globe': return <Globe size={24} />;
+      case "FaLinkedin": return <FaLinkedin size={24} />;
+      case "FaInstagram": return <FaInstagram size={24} />;
+      case "FaGithub": return <FaGithub size={24} />;
+      case "Globe": return <Globe size={24} />;
       default: return null;
     }
   };
@@ -22,17 +29,9 @@ export default async function Footer() {
   return (
     <footer className="bg-black text-white py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        
-        {/* Ikon Sosial Media */}
         <div className="flex gap-6 mb-8">
-          {socialLinks?.map((link) => (
-            <a 
-              key={link.id} 
-              href={link.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-gray-400 transition-colors"
-            >
+          {socialLinks.map((link) => (
+            <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">
               {getIcon(link.icon_type)}
             </a>
           ))}
