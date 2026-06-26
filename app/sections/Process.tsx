@@ -8,8 +8,6 @@ export default async function Process() {
     .order("order_index", { ascending: true });
 
   return (
-    <ProcessContent
-      steps={steps || []}
-    />
+    <ProcessContent/>
   );
 }

@@ -21,9 +21,6 @@ export default async function Hero() {
     await supabase.from("trusted_companies").select("*");
 
   return (
-    <HeroContent
-      hero={hero}
-      companies={companies || []}
-    />
+    <HeroContent/>
   );
 }

@@ -8,5 +8,5 @@ export default async function Work() {
 
   if (!projects) return null;
 
-  return <WorkContent projects={projects} />;
+  return <WorkContent />;
 }

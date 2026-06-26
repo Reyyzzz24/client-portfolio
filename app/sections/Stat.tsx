@@ -10,8 +10,6 @@ export default async function Stat() {
     });
 
   return (
-    <StatContent
-      stats={stats || []}
-    />
+    <StatContent />
   );
 }

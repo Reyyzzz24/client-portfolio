@@ -10,8 +10,6 @@ export default async function Insights() {
     });
 
   return (
-    <InsightsContent
-      posts={posts || []}
-    />
+    <InsightsContent />
   );
 }

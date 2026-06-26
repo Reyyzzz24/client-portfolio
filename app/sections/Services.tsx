@@ -7,8 +7,6 @@ export default async function Services() {
     .select("*");
 
   return (
-    <ServicesContent
-      services={services || []}
-    />
+    <ServicesContent />
   );
 }
