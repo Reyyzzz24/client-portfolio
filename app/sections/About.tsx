@@ -16,5 +16,5 @@ export default async function About() {
     desc3: data?.description_3 ?? "",
   };
 
-  return <AboutContent about={about} />;
+  return <AboutContent />;
 }
