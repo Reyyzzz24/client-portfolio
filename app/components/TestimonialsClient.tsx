@@ -5,28 +5,40 @@ import { supabase } from "@/lib/supabase";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+interface Testimonial {
+  id: number;
+  name: string;
+  quote: string;
+  role: string;
+  avatar_url?: string;
+}
+
 export default function TestimonialsClient() {
-  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await supabase.from("testimonials_data").select("*");
-      if (data) setTestimonials(data);
+      try {
+        const { data } = await supabase.from("testimonials_data").select("*");
+        if (data) setTestimonials(data);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  if (!testimonials?.length) {
-    return (
-      <div className="text-center text-gray-500 py-12">
-        Belum ada testimoni.
-      </div>
-    );
+  if (loading) return <div className="text-center py-12">Memuat testimoni...</div>;
+
+  if (!testimonials.length) {
+    return <div className="text-center text-gray-500 py-12">Belum ada testimoni.</div>;
   }
 
   const currentTestimonial = testimonials[currentIndex];
-
   const nextSlide = () => {
     setCurrentIndex((prev) =>
       prev === testimonials.length - 1 ? 0 : prev + 1
