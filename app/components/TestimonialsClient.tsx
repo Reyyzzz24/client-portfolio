@@ -1,14 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function TestimonialsClient({
-  testimonials,
-}: {
-  testimonials: any[];
-}) {
+export default function TestimonialsClient() {
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await supabase.from("testimonials_data").select("*");
+      if (data) setTestimonials(data);
+    }
+    fetchData();
+  }, []);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!testimonials?.length) {
@@ -203,10 +209,9 @@ export default function TestimonialsClient({
               onClick={() => setCurrentIndex(index)}
               className={`
                 h-2 rounded-full transition-all
-                ${
-                  currentIndex === index
-                    ? "w-8 bg-black"
-                    : "w-2 bg-gray-300"
+                ${currentIndex === index
+                  ? "w-8 bg-black"
+                  : "w-2 bg-gray-300"
                 }
               `}
               whileHover={{
