@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import Skeleton from "./ui/Skeleton";
 
 const container = {
   hidden: {},
@@ -32,7 +33,29 @@ export default function InsightsContent() {
     return new Date(dateString).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   };
 
-  if (loading) return null;
+  // Implementasi Skeleton
+  if (loading) {
+    return (
+      <section className="bg-white py-20 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <Skeleton className="h-12 w-64 mx-auto mb-16" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+                <Skeleton className="h-52 w-full" />
+                <div className="p-6">
+                  <Skeleton className="h-4 w-24 mb-3" />
+                  <Skeleton className="h-6 w-full mb-4" />
+                  <Skeleton className="h-16 w-full mb-5" />
+                  <Skeleton className="h-4 w-28" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-white py-20 px-6 overflow-hidden">

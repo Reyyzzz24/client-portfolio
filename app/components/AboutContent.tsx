@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import Skeleton from "./ui/Skeleton";
 
 const container = {
   hidden: {},
@@ -27,7 +28,23 @@ export default function AboutContent() {
     fetchData();
   }, []);
 
-  if (loading || !about) return null;
+  if (loading || !about) {
+    return (
+      <section id="about" className="bg-white py-20 px-6 md:px-8 overflow-hidden">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <Skeleton className="w-full h-[400px] md:h-[500px] rounded-[2rem]" />
+          <div className="space-y-6">
+            <Skeleton className="h-12 w-1/2" />
+            <div className="space-y-5">
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-3/4" />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="about" className="bg-white py-20 px-6 md:px-8 overflow-hidden">

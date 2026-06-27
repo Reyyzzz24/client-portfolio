@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Skeleton from "./ui/Skeleton";
 
 interface Testimonial {
   id: number;
@@ -32,7 +33,19 @@ export default function TestimonialsClient() {
     fetchData();
   }, []);
 
-  if (loading) return <div className="text-center py-12">Memuat testimoni...</div>;
+  if (loading) {
+    return (
+      <div className="w-full">
+        <div className="bg-white p-12 rounded-3xl border border-gray-100 shadow-sm text-center">
+          <Skeleton className="w-16 h-16 rounded-full mx-auto mb-6" />
+          <Skeleton className="h-6 w-3/4 mx-auto mb-4" />
+          <Skeleton className="h-6 w-1/2 mx-auto mb-8" />
+          <Skeleton className="h-4 w-32 mx-auto mb-2" />
+          <Skeleton className="h-3 w-20 mx-auto" />
+        </div>
+      </div>
+    );
+  }
 
   if (!testimonials.length) {
     return <div className="text-center text-gray-500 py-12">Belum ada testimoni.</div>;

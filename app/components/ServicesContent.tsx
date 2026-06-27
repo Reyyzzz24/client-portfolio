@@ -5,6 +5,7 @@ import * as Icons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import Skeleton from "./ui/Skeleton";
 
 const container = {
   hidden: {},
@@ -29,7 +30,24 @@ export default function ServicesContent() {
     fetchData();
   }, []);
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <section className="bg-slate-50 py-20 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <Skeleton className="h-12 w-64 mx-auto mb-16" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-white p-8 rounded-3xl flex flex-col items-center">
+                <Skeleton className="h-16 w-16 rounded-2xl mb-6" />
+                <Skeleton className="h-6 w-3/4 mb-4" />
+                <Skeleton className="h-4 w-full" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="services" className="bg-slate-50 py-20 px-6 overflow-hidden">

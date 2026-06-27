@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import * as Icons from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
+import Skeleton from "./ui/Skeleton";
 
 const container = {
   hidden: {},
@@ -33,7 +34,24 @@ export default function ProcessContent() {
     fetchData();
   }, []);
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <section className="py-20 px-6 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <Skeleton className="h-12 w-48 mx-auto mb-20" />
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 md:gap-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex flex-col items-center w-full md:w-1/5">
+                <Skeleton className="h-16 w-16 rounded-full mb-6" />
+                <Skeleton className="h-6 w-32 mb-2" />
+                <Skeleton className="h-4 w-24" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="process" className="py-20 px-6 bg-white overflow-hidden">
